@@ -13,13 +13,17 @@ public class Second {
         int num1, num2;
         try {
             System.out.print("Введите 2 целых числа через пробел: ");
-            num1 = scanner.nextInt();
-            num2 = scanner.nextInt();
+            num1 = Math.abs(scanner.nextInt());
+            num2 = Math.abs(scanner.nextInt());
         } catch (Exception e) {
             System.out.println("Числа не определены, проверьте введённые данные");
             return;
         }
-        System.out.println(NOD(num1,num2)+" "+NOK(num1,num2));
+        if (num1 == 0 || num2 == 0) {
+            System.out.println("Одно из чисел равно нулю, невозможно определить НОД и НОК");
+            return;
+        }
+        System.out.println("НОД - " + NOD(num1,num2)+" НОК - "+ NOK(num1,num2));
     }
     private static int NOD(int num1,int num2) {
         int min;
