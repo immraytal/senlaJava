@@ -7,22 +7,24 @@ package task4;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 
 public class Fourth {
-// настроит ввод текста
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String[] text = {};
+        String[] text = {} , temp = {};
         String word;
-        System.out.println("Введите текст: ");
-        try {
-            while (scanner.hasNextLine()) {
-                scanner.nextLine().toLowerCase().split("[/,;:.!?—\\s]+");
+        System.out.println("Введите текст, в последней строке оставьте только q: ");      // Пример текста :One one,
+        try {                                                                             //                one two 12!
+            while (scanner.hasNext()) {                                                   //                q
+                temp = scanner.nextLine().toLowerCase().split("[/,;:.*!?—\\s]+");
+                if (temp[0].equals("q"))
+                    break;
+                text = Stream.concat(Arrays.stream(text), Arrays.stream(temp)).toArray(String[]::new);
             }
-
             System.out.println("Введите искомое слово: ");
-            word = scanner.nextLine().toLowerCase();
+            word = new Scanner(System.in).nextLine().toLowerCase();
 
         }catch (Exception e) {
             System.out.println("Проверьте введённые данные");
@@ -32,9 +34,8 @@ public class Fourth {
         for (String check:text) {
             if (word.equals(check))
                 counter++;
-            System.out.println(check + " ");
         }
-        System.out.println("Слово " + word + " употребляется " + counter + " раз");
+        System.out.println("Слово '" + word + "' употребляется " + counter + " раз");
 
     }
 
